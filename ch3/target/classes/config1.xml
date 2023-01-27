@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="car" class="com.fastcampus.ch3.Car">
+        <constructor-arg name="color" value="red"/>
+        <constructor-arg name="oil" value="100"/>
+        <!--        스프링이 자동으로 100으로 변환 시켜준다 -->
+        <!--        engine은 참조형이어서 ref로 기입 -->
+        <constructor-arg name="engine" ref="engine"/>
+        <constructor-arg name="doors">
+            <array value-type="com.fastcampus.ch3.Door">
+                <ref bean="door"/>
+                <ref bean="door"/>
+            </array>
+        </constructor-arg>
+
+    </bean>
+    <!--    scope=prototype으로 설정하면 getBean호출시 마다 객체가 달라진다.-->
+    <bean id="engine" class="com.fastcampus.ch3.Engine" scope="singleton"/>
+    <bean id="door" class="com.fastcampus.ch3.Door" scope="prototype"/>
+</beans>
